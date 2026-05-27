@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Your Gifts Online | Premium Corporate & Personalized Gift Hampers</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════ */
+:root {
+  --cream:      #FAF6F0;
+  --warm-white: #FFFDF9;
+  --gold:       #C9A96E;
+  --gold-light: #E8D5B0;
+  --gold-dark:  #A07840;
+  --charcoal:   #2C2416;
+  --taupe:      #8B7355;
+  --blush:      #F2E8E0;
+  --dark-bg:    #14100A;
+  --nav-h:      72px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--charcoal);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+
+/* ══ LOADER ══ */
+#loader{position:fixed;inset:0;z-index:9999;background:var(--dark-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .7s,visibility .7s}
+#loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.ld-logo{font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:.25em;animation:fadeUp 1s both}
+.ld-bar{width:100px;height:1px;background:rgba(255,255,255,.08);margin-top:18px;overflow:hidden}
+.ld-bar::after{content:'';display:block;height:100%;width:0;background:var(--gold);animation:lbar 1.8s ease forwards .3s}
+@keyframes lbar{to{width:100%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 5%;transition:background .4s,box-shadow .4s}
+nav.bg{background:rgba(250,246,240,.97);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(201,169,110,.18)}
+.nav-logo img{height:40px;transition:height .3s}
+nav.bg .nav-logo img{height:34px}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center}
+.nav-links a{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--cream);transition:color .3s}
+nav.bg .nav-links a{color:var(--charcoal)}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:#fff!important;padding:9px 22px;border-radius:2px;transition:background .3s!important}
+.nav-cta:hover{background:var(--gold-dark)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--cream);transition:background .3s}
+nav.bg .hamburger span{background:var(--charcoal)}
+.mob-nav{display:none;position:fixed;inset:0;z-index:490;background:var(--dark-bg);flex-direction:column;align-items:center;justify-content:center;gap:32px}
+.mob-nav.open{display:flex}
+.mob-nav a{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:#fff;transition:color .3s}
+.mob-nav a:hover{color:var(--gold)}
+.mob-close{position:absolute;top:22px;right:22px;background:none;border:none;color:rgba(255,255,255,.4);font-size:26px;cursor:pointer}
+
+/* ══ PAGE SYSTEM ══ */
+.page{display:none;min-height:100vh;padding-top:var(--nav-h)}
+.page.active{display:block}
+
+/* ══ SHARED UTILITIES ══ */
+.section-label{font-size:10px;font-weight:500;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.section-label::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
+.section-label.center{justify-content:center}
+.section-label.center::before{display:none}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.6rem);font-weight:300;line-height:1.08;color:var(--charcoal)}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-title.white{color:#fff}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#fff;padding:13px 30px;border-radius:2px;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:background .3s,transform .3s;border:none;cursor:pointer}
+.btn-gold:hover{background:var(--gold-dark);transform:translateY(-2px)}
+.btn-outline-dark{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--gold);color:var(--gold);padding:12px 28px;border-radius:2px;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:all .3s;background:none;cursor:pointer}
+.btn-outline-dark:hover{background:var(--gold);color:#fff}
+.btn-outline-light{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.35);color:#fff;padding:12px 28px;border-radius:2px;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:all .3s;background:none}
+.btn-outline-light:hover{border-color:var(--gold);color:var(--gold)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.v{opacity:1;transform:none}
+.rl{opacity:0;transform:translateX(-28px);transition:opacity .8s,transform .8s}
+.rl.v{opacity:1;transform:none}
+.rr{opacity:0;transform:translateX(28px);transition:opacity .8s,transform .8s}
+.rr.v{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+/* ══ MARQUEE ══ */
+.marquee-strip{background:var(--charcoal);padding:13px 0;overflow:hidden;display:flex}
+.m-track{display:flex;gap:56px;white-space:nowrap;animation:mar 22s linear infinite;flex-shrink:0}
+.m-track:nth-child(2){animation-delay:-11s}
+@keyframes mar{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.m-item{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:18px}
+.m-item::after{content:'✦';color:var(--taupe);font-size:7px}
+
+/* ══ HERO ══ */
+.hero{height:100vh;min-height:620px;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.hero-slides{position:absolute;inset:0}
+.h-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+.h-slide.active{opacity:1}
+.h-slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:hzoom 8s ease forwards}
+@keyframes hzoom{to{transform:scale(1)}}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,8,0,.88) 0%,rgba(14,8,0,.38) 55%,rgba(14,8,0,.12) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 6% 80px;max-width:720px;animation:fadeUp 1.2s ease 1.8s both}
+.hero-eye{font-size:10px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.hero-eye::before{content:'';display:block;width:34px;height:1px;background:var(--gold)}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vw,5.8rem);font-weight:300;line-height:1.04;color:#fff;margin-bottom:22px}
+.hero-h1 em{font-style:italic;color:var(--gold-light)}
+.hero-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.72);line-height:1.75;max-width:460px;margin-bottom:34px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.h-dots{position:absolute;bottom:28px;right:6%;display:flex;gap:7px;z-index:3}
+.h-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.28);cursor:pointer;transition:all .3s}
+.h-dot.active{background:var(--gold);transform:scale(1.4)}
+.hero-scroll{position:absolute;right:6%;top:50%;transform:translateY(-50%) rotate(90deg);z-index:3;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:8px;animation:fadeUp 1s ease 2.5s both}
+.hero-scroll::after{content:'';display:block;width:36px;height:1px;background:rgba(255,255,255,.25)}
+
+/* ══ ABOUT ══ */
+.about{padding:90px 6%;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.about-imgs{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative}
+.ai-main{grid-column:1;grid-row:1/3;border-radius:3px;overflow:hidden;aspect-ratio:3/4}
+.ai-s1{grid-column:2;grid-row:1;border-radius:3px;overflow:hidden;aspect-ratio:4/3}
+.ai-s2{grid-column:2;grid-row:2;border-radius:3px;overflow:hidden;aspect-ratio:4/3}
+.about-imgs img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.about-imgs div:hover img{transform:scale(1.05)}
+.about-badge{position:absolute;bottom:-18px;left:-18px;width:104px;height:104px;border-radius:50%;background:var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 8px 28px rgba(201,169,110,.38);z-index:2}
+.about-badge b{font-size:26px;font-weight:700;color:#fff;line-height:1}
+.about-badge small{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-top:4px;display:block;padding:0 8px}
+.about-text p{font-size:15px;line-height:1.82;color:var(--taupe);margin:18px 0}
+.founder-row{display:flex;align-items:center;gap:18px;margin-top:36px;padding-top:28px;border-top:1px solid var(--gold-light)}
+.f-pic{width:60px;height:60px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid var(--gold-light)}
+.f-pic img{width:100%;height:100%;object-fit:cover}
+.f-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--charcoal)}
+.f-role{font-size:12px;color:var(--taupe)}
+.f-sig img{height:28px;margin-top:4px;opacity:.65}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.stat{text-align:center;padding:18px 8px;background:var(--blush);border-radius:3px}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:var(--gold);line-height:1}
+.stat-l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe);margin-top:5px}
+
+/* ══ GIFT CARDS ══ */
+.gifts-section{padding:80px 6%;background:var(--warm-white)}
+.gifts-header{text-align:center;margin-bottom:52px}
+.gifts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.g-card{border-radius:3px;overflow:hidden;position:relative;cursor:pointer;text-decoration:none}
+.g-card:first-child{grid-column:span 2}
+.g-img{width:100%;height:320px;object-fit:cover;transition:transform .65s ease;display:block}
+.g-card:first-child .g-img{height:400px}
+.g-card:hover .g-img{transform:scale(1.06)}
+.g-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,8,0,.78) 0%,transparent 55%)}
+.g-info{position:absolute;bottom:0;left:0;right:0;padding:26px}
+.g-tag{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:7px;display:block}
+.g-title{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:400;color:#fff;line-height:1.2;margin-bottom:7px}
+.g-desc{font-size:12px;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:14px}
+.g-link{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+.g-link::after{content:'→';transition:transform .3s}
+.g-card:hover .g-link::after{transform:translateX(4px)}
+
+/* ══ PAGE HERO (inner pages) ══ */
+.page-hero{position:relative;height:480px;display:flex;align-items:flex-end;overflow:hidden}
+.page-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.page-hero-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,8,0,.82) 0%,rgba(14,8,0,.3) 100%)}
+.page-hero-content{position:relative;z-index:2;padding:0 6% 60px}
+.page-hero-eye{font-size:10px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.page-hero-eye::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
+.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:300;color:#fff;line-height:1.08;margin-bottom:14px}
+.page-hero p{font-size:15px;color:rgba(255,255,255,.7);max-width:520px;line-height:1.7}
+
+/* ══ CORPORATE PAGE ══ */
+.corp-intro{padding:80px 6%;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.corp-img-wrap{position:relative;border-radius:3px;overflow:hidden}
+.corp-img-wrap img{width:100%;object-fit:cover;aspect-ratio:4/3;transition:transform .6s}
+.corp-img-wrap:hover img{transform:scale(1.04)}
+.corp-features{padding:0 6% 80px;background:var(--warm-white)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
+.feat-card{padding:36px 28px;border:1px solid var(--gold-light);border-radius:3px;transition:box-shadow .3s,transform .3s}
+.feat-card:hover{box-shadow:0 12px 40px rgba(201,169,110,.15);transform:translateY(-4px)}
+.feat-icon{font-size:32px;margin-bottom:18px;display:block}
+.feat-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--charcoal);margin-bottom:10px}
+.feat-desc{font-size:13px;color:var(--taupe);line-height:1.7}
+.corp-gallery{padding:0 6% 80px}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.gallery-grid img{width:100%;height:220px;object-fit:cover;border-radius:3px;transition:transform .5s,box-shadow .5s}
+.gallery-grid img:hover{transform:scale(1.04);box-shadow:0 8px 32px rgba(0,0,0,.15)}
+.gallery-grid .g-wide{grid-column:span 2;height:280px}
+.corp-occasions{padding:0 6% 80px;background:var(--blush)}
+.occ-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.occ-item{text-align:center;padding:28px 16px}
+.occ-emoji{font-size:36px;display:block;margin-bottom:12px}
+.occ-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--charcoal);margin-bottom:6px}
+.occ-desc{font-size:12px;color:var(--taupe);line-height:1.6}
+
+/* ══ WEDDING PAGE ══ */
+.wed-intro{padding:80px 6%;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.wed-gallery{padding:0 6% 80px}
+.wed-mosaic{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:280px 280px;gap:14px;margin-top:40px}
+.wed-mosaic img{width:100%;height:100%;object-fit:cover;border-radius:3px;transition:transform .5s}
+.wed-mosaic img:hover{transform:scale(1.04)}
+.wed-mosaic .w-tall{grid-row:span 2;height:100%}
+.wed-packages{padding:0 6% 80px;background:var(--charcoal)}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.pkg-card{padding:40px 28px;border:1px solid rgba(201,169,110,.15);border-radius:3px;transition:border-color .3s,background .3s}
+.pkg-card:hover{border-color:var(--gold);background:rgba(201,169,110,.05)}
+.pkg-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block}
+.pkg-name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:18px}
+.pkg-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.pkg-list li{font-size:13px;color:rgba(255,255,255,.55);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.pkg-list li::before{content:'✦';color:var(--gold);font-size:8px;margin-top:4px;flex-shrink:0}
+.wed-why{padding:0 6% 80px;background:var(--warm-white)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.why-card{padding:32px 24px;background:var(--blush);border-radius:3px}
+.why-icon{font-size:28px;margin-bottom:14px;display:block}
+.why-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--charcoal);margin-bottom:8px}
+.why-desc{font-size:13px;color:var(--taupe);line-height:1.7}
+
+/* ══ OCCASIONAL PAGE ══ */
+.occ-hero-section{padding:80px 6%}
+.occ-showcase{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:48px}
+.occ-big{border-radius:3px;overflow:hidden;position:relative;grid-row:span 2}
+.occ-big img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.occ-big:hover img{transform:scale(1.05)}
+.occ-sm{border-radius:3px;overflow:hidden;position:relative}
+.occ-sm img{width:100%;height:260px;object-fit:cover;transition:transform .6s;display:block}
+.occ-sm:hover img{transform:scale(1.05)}
+.occ-card-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,8,0,.75),transparent 55%)}
+.occ-card-label{position:absolute;bottom:0;left:0;right:0;padding:22px;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:#fff}
+.occ-occasions-grid{padding:0 6% 80px;background:var(--warm-white)}
+.occ-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+.occ-occasion-card{border:1px solid var(--gold-light);border-radius:3px;padding:28px 20px;text-align:center;transition:all .3s;cursor:pointer}
+.occ-occasion-card:hover{background:var(--gold);border-color:var(--gold)}
+.occ-occasion-card:hover .oc-name,.occ-occasion-card:hover .oc-desc{color:#fff}
+.oc-emoji{font-size:32px;display:block;margin-bottom:12px}
+.oc-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--charcoal);margin-bottom:6px;transition:color .3s}
+.oc-desc{font-size:12px;color:var(--taupe);line-height:1.6;transition:color .3s}
+.occ-products{padding:0 6% 80px}
+.occ-prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.prod-card{border-radius:3px;overflow:hidden;background:var(--warm-white);border:1px solid var(--gold-light);transition:transform .3s,box-shadow .3s}
+.prod-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.1)}
+.prod-img{width:100%;height:240px;object-fit:cover;display:block}
+.prod-body{padding:20px}
+.prod-category{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.prod-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--charcoal);margin-bottom:6px}
+.prod-desc{font-size:12px;color:var(--taupe);line-height:1.6}
+
+/* ══ PROCESS / HOW IT WORKS ══ */
+.process{padding:80px 6%;background:var(--charcoal)}
+.process-header{text-align:center;margin-bottom:56px}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.proc-step{padding:44px 28px;background:rgba(255,255,255,.03);border:1px solid rgba(201,169,110,.08);position:relative;overflow:hidden;transition:background .4s}
+.proc-step:hover{background:rgba(201,169,110,.07)}
+.proc-num{font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:300;color:rgba(201,169,110,.1);position:absolute;top:12px;right:16px;line-height:1;transition:color .4s}
+.proc-step:hover .proc-num{color:rgba(201,169,110,.2)}
+.proc-icon{font-size:26px;margin-bottom:18px;display:block}
+.proc-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold);margin-bottom:10px}
+.proc-desc{font-size:13px;color:rgba(255,255,255,.45);line-height:1.7}
+
+/* ══ TESTIMONIALS ══ */
+.testi-section{padding:80px 6%}
+.testi-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px;flex-wrap:wrap;gap:16px}
+.scroll-btns{display:flex;gap:8px}
+.s-btn{width:42px;height:42px;border-radius:2px;border:1px solid var(--gold-light);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--charcoal);transition:all .3s}
+.s-btn:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+.testi-scroll{display:flex;gap:18px;overflow-x:auto;padding-bottom:16px;scrollbar-width:none;scroll-snap-type:x mandatory}
+.testi-scroll::-webkit-scrollbar{display:none}
+.t-card{flex-shrink:0;width:280px;border-radius:3px;overflow:hidden;scroll-snap-align:start}
+.t-card img{width:100%;height:400px;object-fit:cover;display:block;transition:transform .5s}
+.t-card:hover img{transform:scale(1.04)}
+
+/* ══ CLIENTS ══ */
+.clients-section{padding:56px 6%;background:var(--blush);overflow:hidden}
+.clients-head{text-align:center;margin-bottom:36px}
+.cli-track{display:flex;gap:44px;align-items:center;animation:mar 26s linear infinite;width:max-content}
+.cli-logo{flex-shrink:0;height:38px;width:auto;opacity:.45;filter:grayscale(1);transition:opacity .3s,filter .3s;object-fit:contain}
+.cli-logo:hover{opacity:1;filter:grayscale(0)}
+
+/* ══ CTA BANNER ══ */
+.cta-banner{margin:0 6% 80px;border-radius:3px;background:var(--charcoal);padding:60px 52px;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center;position:relative;overflow:hidden}
+.cta-banner::before{content:'✦';position:absolute;right:-30px;top:50%;transform:translateY(-50%);font-size:200px;color:rgba(201,169,110,.04);pointer-events:none}
+.cta-label{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,2.8vw,2.6rem);font-weight:300;color:#fff;line-height:1.2;margin-bottom:6px}
+.cta-sub{font-size:13px;color:rgba(255,255,255,.45)}
+.cta-acts{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.cta-email{font-size:12px;color:rgba(255,255,255,.35);transition:color .3s}
+.cta-email:hover{color:var(--gold)}
+
+/* ══ CONTACT PAGE ══ */
+.contact-layout{padding:80px 6%;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.contact-info h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:var(--charcoal);margin-bottom:12px}
+.contact-info>p{font-size:15px;color:var(--taupe);line-height:1.75;margin-bottom:36px}
+.c-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:24px}
+.c-icon{width:44px;height:44px;border-radius:2px;background:var(--blush);border:1px solid var(--gold-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-detail p:first-child{font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.c-detail a,.c-detail span{font-size:14px;color:var(--charcoal);display:block;line-height:1.6}
+.c-detail a:hover{color:var(--gold)}
+.c-socials{display:flex;gap:10px;margin-top:32px}
+.c-soc{width:38px;height:38px;border-radius:2px;border:1px solid var(--gold-light);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--taupe);transition:all .3s;text-decoration:none}
+.c-soc:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+.contact-form{background:var(--warm-white);padding:40px;border-radius:3px;border:1px solid var(--gold-light)}
+.contact-form h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--charcoal);margin-bottom:6px}
+.contact-form>p{font-size:13px;color:var(--taupe);margin-bottom:28px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--taupe);margin-bottom:7px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 14px;border:1px solid var(--gold-light);border-radius:2px;background:#fff;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--charcoal);transition:border-color .3s,box-shadow .3s;outline:none;-webkit-appearance:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,110,.12)}
+.form-group textarea{resize:vertical;min-height:110px}
+.form-success{display:none;padding:20px;background:rgba(122,140,110,.1);border:1px solid var(--sage);border-radius:2px;text-align:center;font-size:14px;color:var(--sage)}
+.map-section{padding:0 6% 80px}
+.map-embed{width:100%;height:360px;border:none;border-radius:3px;filter:sepia(.2) contrast(.9);margin-top:32px}
+
+/* ══ FOOTER ══ */
+footer{background:var(--dark-bg);padding:60px 6% 28px}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1.4fr;gap:52px;margin-bottom:52px}
+.f-logo img{height:44px;margin-bottom:18px;filter:brightness(.9)}
+.f-about{font-size:13px;color:rgba(255,255,255,.38);line-height:1.8;margin-bottom:20px}
+.f-social{display:flex;gap:10px}
+.fsoc{width:34px;height:34px;border-radius:2px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.38);font-size:12px;text-decoration:none;transition:all .3s}
+.fsoc:hover{border-color:var(--gold);color:var(--gold)}
+.fcol h4{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.fcol ul a{font-size:13px;color:rgba(255,255,255,.38);transition:color .3s}
+.fcol ul a:hover{color:var(--gold)}
+.fcon{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:rgba(255,255,255,.38);margin-bottom:14px;line-height:1.6}
+.fcon-icon{color:var(--gold);flex-shrink:0;margin-top:2px}
+.fcon a{color:rgba(255,255,255,.38);transition:color .3s}
+.fcon a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-bottom p,.footer-bottom a{font-size:11px;color:rgba(255,255,255,.22)}
+.footer-bottom a:hover{color:var(--gold)}
+.footer-bottom-links{display:flex;gap:20px}
+
+/* ══ WA FLOAT ══ */
+.wa-btn{position:fixed;bottom:26px;right:26px;z-index:600;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 20px rgba(37,211,102,.38);animation:bob 2.5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.wa-ring{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(37,211,102,.35);animation:ring 2s ease-out infinite}
+@keyframes ring{0%{transform:scale(1);opacity:1}100%{transform:scale(1.55);opacity:0}}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1024px){
+  .about,.corp-intro,.wed-intro,.contact-layout{grid-template-columns:1fr;gap:48px}
+  .gifts-grid{grid-template-columns:1fr 1fr}
+  .g-card:first-child{grid-column:span 2}
+  .features-grid,.why-grid,.occ-prod-grid{grid-template-columns:1fr 1fr}
+  .occ-cards{grid-template-columns:repeat(2,1fr)}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid .g-wide{grid-column:span 2}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
+  .pkg-grid{grid-template-columns:1fr 1fr}
+  .cta-banner{grid-template-columns:1fr}
+  .cta-acts{align-items:flex-start}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .about-imgs{grid-template-columns:1fr 1fr;grid-template-rows:auto auto}
+  .ai-main{grid-column:1/3;grid-row:1;aspect-ratio:16/9}
+  .ai-s1,.ai-s2{grid-row:2}
+  .gifts-grid,.wed-mosaic,.occ-showcase{grid-template-columns:1fr}
+  .g-card:first-child{grid-column:span 1}
+  .features-grid,.feat-card{padding:24px 18px}
+  .features-grid,.why-grid,.occ-cards,.occ-prod-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .occ-cards{grid-template-columns:1fr 1fr}
+  .pkg-grid{grid-template-columns:1fr}
+  .proc-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .cta-banner{padding:44px 28px}
+  .page-hero{height:360px}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .occ-big{grid-row:span 1}
+  .occ-big img{height:300px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LOADER ══ -->
+<div id="loader">
+  <div class="ld-logo">Get Your Gifts</div>
+  <div class="ld-bar"></div>
+</div>
+
+<!-- ══ WA FLOAT ══ -->
+<a href="https://api.whatsapp.com/send/?phone=916362631461" class="wa-btn" target="_blank" rel="noopener" title="WhatsApp us">
+  <span class="wa-ring"></span>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<!-- ══ MOBILE NAV ══ -->
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close" id="mobClose">✕</button>
+  <a href="#" onclick="nav('home');closeMob()">Home</a>
+  <a href="#" onclick="nav('corporate');closeMob()">Corporate Gifts</a>
+  <a href="#" onclick="nav('wedding');closeMob()">Wedding Favours</a>
+  <a href="#" onclick="nav('occasional');closeMob()">Occasional</a>
+  <a href="#" onclick="nav('contact');closeMob()">Contact Us</a>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo" onclick="nav('home');return false">
+    <img src="https://getyourgiftsonline.com/wp-content/uploads/2023/01/logo-horizontal.png" alt="Get Your Gifts Online" id="navLogoImg">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" onclick="nav('home');return false" data-page="home">Home</a></li>
+    <li><a href="#" onclick="nav('corporate');return false" data-page="corporate">Corporate Gifts</a></li>
+    <li><a href="#" onclick="nav('wedding');return false" data-page="wedding">Wedding Favours</a></li>
+    <li><a href="#" onclick="nav('occasional');return false" data-page="occasional">Occasional</a></li>
+    <li><a href="#" onclick="nav('contact');return false" data-page="contact">Contact Us</a></li>
+    <li><a href="https://api.whatsapp.com/send/?phone=916362631461" class="nav-cta" target="_blank" rel="noopener">Get Pricing</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMob()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     PAGE: HOME
+════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <div class="hero" style="padding-top:0;margin-top:calc(-1 * var(--nav-h))">
+    <div class="hero-slides">
+      <div class="h-slide active"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/home-section-2-768x1024.jpg" alt="Gift Hampers"></div>
+      <div class="h-slide"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/home-section-222.jpg" alt="Corporate Gifting"></div>
+      <div class="h-slide"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/home-section-22-819x1024.jpg" alt="Personalised Gifts"></div>
+    </div>
+    <div class="hero-ov"></div>
+    <span class="hero-scroll">Scroll</span>
+    <div class="hero-content">
+      <p class="hero-eye">PAN-India Delivery · Bangalore Based</p>
+      <h1 class="hero-h1">Gifts that carry <em>your story</em></h1>
+      <p class="hero-sub">Curated corporate hampers, wedding favours & personalised gifts — crafted with intention for every special moment.</p>
+      <div class="hero-btns">
+        <a href="#" onclick="nav('corporate');return false" class="btn-gold">Explore Corporate</a>
+        <a href="#" onclick="nav('contact');return false" class="btn-outline-light">Get a Quote</a>
+      </div>
+    </div>
+    <div class="h-dots" id="hDots">
+      <div class="h-dot active" onclick="goSlide(0)"></div>
+      <div class="h-dot" onclick="goSlide(1)"></div>
+      <div class="h-dot" onclick="goSlide(2)"></div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="m-track">
+      <span class="m-item">Corporate Gifting</span><span class="m-item">Wedding Favours</span><span class="m-item">Festive Hampers</span><span class="m-item">Employee Onboarding</span><span class="m-item">Diwali Gifts</span><span class="m-item">Women's Day</span><span class="m-item">Anniversary Gifts</span><span class="m-item">Eco-Friendly Gifts</span><span class="m-item">Luxury Hampers</span><span class="m-item">Corporate Gifting</span><span class="m-item">Wedding Favours</span><span class="m-item">Festive Hampers</span><span class="m-item">Employee Onboarding</span><span class="m-item">Diwali Gifts</span><span class="m-item">Women's Day</span><span class="m-item">Anniversary Gifts</span><span class="m-item">Eco-Friendly Gifts</span><span class="m-item">Luxury Hampers</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about-imgs rl">
+      <div class="ai-main"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/home-section-2-768x1024.jpg" alt="Gift Hamper"></div>
+      <div class="ai-s1"><img src="https://getyourgiftsonline.com/wp-content/uploads/elementor/thumbs/carosu5-r7oxnjqmidl099plsxpjupmwp0o47dv88suasba2v4.jpg" alt="Diwali Hamper"></div>
+      <div class="ai-s2"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/occatinal.png" alt="Occasional Gift"></div>
+      <div class="about-badge"><b>5+</b><small>Years of Joy</small></div>
+    </div>
+    <div class="rr">
+      <p class="section-label">Our Story</p>
+      <h2 class="section-title">GYG — <em>Gifting</em> with a heart</h2>
+      <p style="font-size:15px;line-height:1.8;color:var(--taupe);margin-top:18px">At every special occasion, we have the perfect gift for you. From birthdays to anniversaries, corporate milestones to festive celebrations — we curate something truly special.</p>
+      <p style="font-size:15px;line-height:1.8;color:var(--taupe)">We provide premium corporate gift solutions, personalised hampers and occasion-specific gifts with PAN-India delivery, straight from the heart of Bangalore.</p>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-n">500+</div><div class="stat-l">Clients Served</div></div>
+        <div class="stat"><div class="stat-n">20+</div><div class="stat-l">Trusted Brands</div></div>
+        <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Custom Made</div></div>
+      </div>
+      <div class="founder-row">
+        <div class="f-pic"><img src="https://getyourgiftsonline.com/wp-content/uploads/2023/01/761ff3f4-12c5-4bb1-9bb1-aa9f17218c60-225x300.jpg" alt="Dharti"></div>
+        <div>
+          <div class="f-name">Dharti</div>
+          <div class="f-role">Founder, Get Your Gifts Online</div>
+          <div class="f-sig"><img src="https://getyourgiftsonline.com/wp-content/uploads/2023/01/rosemary-signature-2.png" alt="Signature"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIFT CATEGORIES -->
+  <section class="gifts-section">
+    <div class="gifts-header reveal">
+      <p class="section-label center">Our Collections</p>
+      <h2 class="section-title">Give <em>Meaningful</em> Gifts</h2>
+      <p style="color:var(--taupe);margin-top:10px;font-size:15px">Thoughtfully curated for every occasion and recipient</p>
+    </div>
+    <div class="gifts-grid">
+      <a class="g-card reveal d1" href="#" onclick="nav('corporate');return false">
+        <img class="g-img" src="https://getyourgiftsonline.com/wp-content/uploads/elementor/thumbs/Corporate-Gift-Diggaj-r7hlkdyzaczxape3xwwmyb6wpu939k3m4q680pn30g.webp" alt="Corporate Gifting">
+        <div class="g-ov"></div>
+        <div class="g-info">
+          <span class="g-tag">For Businesses</span>
+          <h3 class="g-title">Corporate Gifting</h3>
+          <p class="g-desc">Reward employees, impress clients, and celebrate milestones with elegantly curated hampers.</p>
+          <span class="g-link">Explore</span>
+        </div>
+      </a>
+      <a class="g-card reveal d2" href="#" onclick="nav('wedding');return false">
+        <img class="g-img" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/home-section-222.jpg" alt="Wedding Favours">
+        <div class="g-ov"></div>
+        <div class="g-info">
+          <span class="g-tag">Weddings</span>
+          <h3 class="g-title">Wedding Favours</h3>
+          <p class="g-desc">Welcome your guests with memorable room gift hampers and bespoke favours.</p>
+          <span class="g-link">Explore</span>
+        </div>
+      </a>
+      <a class="g-card reveal d3" href="#" onclick="nav('occasional');return false">
+        <img class="g-img" src="https://getyourgiftsonline.com/wp-content/uploads/elementor/thumbs/carosu5-r7oxnjqmidl099plsxpjupmwp0o47dv88suasba2v4.jpg" alt="Diwali Hampers">
+        <div class="g-ov"></div>
+        <div class="g-info">
+          <span class="g-tag">Festive</span>
+          <h3 class="g-title">Diwali Hampers</h3>
+          <p class="g-desc">Festive curations to light up every celebration with warmth and delight.</p>
+          <span class="g-link">Explore</span>
+        </div>
+      </a>
+      <a class="g-card reveal d4" href="#" onclick="nav('occasional');return false">
+        <img class="g-img" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/occatinal.png" alt="Occasional Gifting">
+        <div class="g-ov"></div>
+        <div class="g-info">
+          <span class="g-tag">All Occasions</span>
+          <h3 class="g-title">Occasional Gifting</h3>
+          <p class="g-desc">Birthdays, anniversaries, baby showers — the perfect gift for every milestone.</p>
+          <span class="g-link">Explore</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process">
+    <div class="process-header reveal">
+      <p class="section-label center">Simple Process</p>
+      <h2 class="section-title white">How it <em>works</em></h2>
+      <p style="color:rgba(255,255,255,.4);margin-top:12px;font-size:14px">From enquiry to doorstep — effortless gifting in four steps</p>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-step reveal d1"><span class="proc-num">01</span><span class="proc-icon">💬</span><h3 class="proc-title">Share Your Needs</h3><p class="proc-desc">Tell us the occasion, budget, and number of recipients. We'll understand exactly what you're looking for.</p></div>
+      <div class="proc-step reveal d2"><span class="proc-num">02</span><span class="proc-icon">🎨</span><h3 class="proc-title">We Curate</h3><p class="proc-desc">Our team handpicks premium items into beautiful, customised hampers tailored to your brand and occasion.</p></div>
+      <div class="proc-step reveal d3"><span class="proc-num">03</span><span class="proc-icon">✅</span><h3 class="proc-title">You Approve</h3><p class="proc-desc">We share samples and designs for your approval before producing the full gifting set.</p></div>
+      <div class="proc-step reveal d4"><span class="proc-num">04</span><span class="proc-icon">📦</span><h3 class="proc-title">We Deliver</h3><p class="proc-desc">PAN-India delivery right to your recipients' doors — on time, every time, beautifully packed.</p></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testi-section">
+    <div class="testi-header reveal">
+      <div>
+        <p class="section-label">Happy Customers</p>
+        <h2 class="section-title">What Our <em>Customers</em> Say ⭐</h2>
+      </div>
+      <div class="scroll-btns">
+        <button class="s-btn" onclick="scrollT(-1)">←</button>
+        <button class="s-btn" onclick="scrollT(1)">→</button>
+      </div>
+    </div>
+    <div class="testi-scroll reveal" id="testiScroll">
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu6-768x1024.jpg" alt="Customer"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu7-768x1024.jpg" alt="Customer"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu2-768x1024.jpg" alt="Customer"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu4-768x1024.jpg" alt="Customer"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu3-768x1024.jpg" alt="Customer"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/4carosul-768x1024.jpg" alt="Customer"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/3carossu-819x1024.jpg" alt="Customer"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/2carosu-768x1024.jpg" alt="Customer"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/1carosu-768x1024.jpg" alt="Customer"></div>
+    </div>
+  </section>
+
+  <!-- CLIENTS -->
+  <section class="clients-section">
+    <div class="clients-head reveal">
+      <p class="section-label center">Trusted By</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:var(--charcoal);text-align:center">Brands that trust GYG</h3>
+    </div>
+    <div style="overflow:hidden">
+      <div class="cli-track">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C2-150x150.webp" alt="Assetz">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C3-150x150.webp" alt="Equitas">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C4-150x150.webp" alt="Karle Group">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C5-150x150.webp" alt="Mittal's">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C6-150x150.webp" alt="The Label">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g6-scaled.webp" alt="Neokred">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g5-scaled.webp" alt="Tara">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g4-scaled.webp" alt="Sightsee">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g3-scaled.webp" alt="Melser">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2023/10/factsuite-logo.jpg" alt="Factsuite">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/Workshaala-Logo-Black.webp" alt="Workshaala">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/PNG-blue-upliance.webp" alt="Upliance">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g7-scaled.webp" alt="Nambiar">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g8-scaled.webp" alt="Neeta">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/Combination-mark-Tagline-Blissclub-peach-1-scaled.webp" alt="Bliss Club">
+        <!-- duplicate -->
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C2-150x150.webp" alt="Assetz">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C3-150x150.webp" alt="Equitas">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C4-150x150.webp" alt="Karle Group">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C5-150x150.webp" alt="Mittal's">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C6-150x150.webp" alt="The Label">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g6-scaled.webp" alt="Neokred">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g5-scaled.webp" alt="Tara">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g4-scaled.webp" alt="Sightsee">
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner reveal">
+    <div>
+      <p class="cta-label">Ready to Gift?</p>
+      <h2 class="cta-title">Let's create something <em style="font-style:italic;color:var(--gold)">unforgettable</em> together</h2>
+      <p class="cta-sub">Reach out via WhatsApp for a custom quote. We respond fast.</p>
+    </div>
+    <div class="cta-acts">
+      <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <a href="mailto:dharti@getyourgiftsonline.com" class="cta-email">or email us →</a>
+    </div>
+  </div>
+
+</div><!-- /page-home -->
+
+
+<!-- ════════════════════════════════════════
+     PAGE: CORPORATE
+════════════════════════════════════════ -->
+<div class="page" id="page-corporate">
+
+  <div class="page-hero">
+    <img src="https://getyourgiftsonline.com/wp-content/uploads/elementor/thumbs/Corporate-Gift-Diggaj-r7hlkdyzaczxape3xwwmyb6wpu939k3m4q680pn30g.webp" alt="Corporate Gifting">
+    <div class="page-hero-ov"></div>
+    <div class="page-hero-content">
+      <p class="page-hero-eye">Premium Corporate Solutions</p>
+      <h1>Corporate <em style="font-style:italic;color:var(--gold-light)">Gifting</em></h1>
+      <p>Beautifully curated hampers that reward your team, impress your clients, and celebrate every milestone — tailored to your brand.</p>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="corp-intro">
+    <div class="rl">
+      <div class="corp-img-wrap">
+        <img src="https://getyourgiftsonline.com/wp-content/uploads/elementor/thumbs/Corporate-Gift-Diggaj-r7hlkdyzaczxape3xwwmyb6wpu939k3m4q680pn30g.webp" alt="Corporate Gift">
+      </div>
+    </div>
+    <div class="rr">
+      <p class="section-label">Why Corporate Gifting?</p>
+      <h2 class="section-title">Gifts that <em>build</em> relationships</h2>
+      <p style="font-size:15px;color:var(--taupe);line-height:1.8;margin:18px 0">Our corporate gifting service offers proven solutions to help you reward and appreciate your employees, clients, and partners effectively. Every hamper is a reflection of your brand's care and thoughtfulness.</p>
+      <p style="font-size:15px;color:var(--taupe);line-height:1.8;margin-bottom:28px">From branded packaging to personalised notes, we handle every detail so you can focus on what matters — building lasting connections.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener">Get Custom Quote</a>
+        <a href="#" onclick="nav('contact');return false" class="btn-outline-dark">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="corp-features" style="padding-top:80px">
+    <div class="reveal" style="text-align:center;margin-bottom:0">
+      <p class="section-label center">What We Offer</p>
+      <h2 class="section-title">Everything your <em>brand</em> needs</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card reveal d1"><span class="feat-icon">🏷️</span><h3 class="feat-title">Custom Branding</h3><p class="feat-desc">Your logo, brand colours, and messaging printed on packaging, tags, and inserts. Every hamper becomes a brand experience.</p></div>
+      <div class="feat-card reveal d2"><span class="feat-icon">🎁</span><h3 class="feat-title">Premium Curation</h3><p class="feat-desc">Hand-selected premium products — from gourmet foods to wellness items — assembled into stunning, gift-ready hampers.</p></div>
+      <div class="feat-card reveal d3"><span class="feat-icon">📦</span><h3 class="feat-title">Bulk Orders</h3><p class="feat-desc">Whether it's 10 gifts or 10,000 — we handle bulk orders with consistent quality and on-time delivery every time.</p></div>
+      <div class="feat-card reveal d1"><span class="feat-icon">🌿</span><h3 class="feat-title">Eco-Friendly Options</h3><p class="feat-desc">Sustainable packaging and eco-conscious product selections for brands that care about the planet.</p></div>
+      <div class="feat-card reveal d2"><span class="feat-icon">🚚</span><h3 class="feat-title">PAN-India Delivery</h3><p class="feat-desc">Delivering across every pin code in India — directly to your office, employees' homes, or event venues.</p></div>
+      <div class="feat-card reveal d3"><span class="feat-icon">💌</span><h3 class="feat-title">Personalised Notes</h3><p class="feat-desc">Handwritten or printed personalised messages for each recipient — making every gift feel truly special and individual.</p></div>
+    </div>
+  </section>
+
+  <!-- OCCASIONS -->
+  <section class="corp-occasions" style="padding:80px 6%">
+    <div class="reveal" style="text-align:center;margin-bottom:40px">
+      <p class="section-label center">Corporate Occasions</p>
+      <h2 class="section-title">Perfect for <em>every</em> milestone</h2>
+    </div>
+    <div class="occ-grid">
+      <div class="occ-item reveal d1"><span class="occ-emoji">🎉</span><div class="occ-name">Employee Appreciation</div><p class="occ-desc">Show your team how much they're valued with thoughtfully chosen gifts.</p></div>
+      <div class="occ-item reveal d2"><span class="occ-emoji">🤝</span><div class="occ-name">Client Gifting</div><p class="occ-desc">Strengthen relationships with clients through impressive, branded hampers.</p></div>
+      <div class="occ-item reveal d3"><span class="occ-emoji">🆕</span><div class="occ-name">Employee Onboarding</div><p class="occ-desc">Welcome new team members with a curated onboarding kit they'll love.</p></div>
+      <div class="occ-item reveal d4"><span class="occ-emoji">🪔</span><div class="occ-name">Diwali & Festive</div><p class="occ-desc">Celebrate festivals with premium hampers your entire workforce will treasure.</p></div>
+      <div class="occ-item reveal d1"><span class="occ-emoji">🏆</span><div class="occ-name">Awards & Milestones</div><p class="occ-desc">Recognise achievements and work anniversaries with luxury gifts.</p></div>
+      <div class="occ-item reveal d2"><span class="occ-emoji">👩</span><div class="occ-name">Women's Day</div><p class="occ-desc">Celebrate the women in your organisation with curated, elegant gifts.</p></div>
+      <div class="occ-item reveal d3"><span class="occ-emoji">🎓</span><div class="occ-name">Farewell Gifts</div><p class="occ-desc">Send off departing colleagues with a memorable, heartfelt hamper.</p></div>
+      <div class="occ-item reveal d4"><span class="occ-emoji">📊</span><div class="occ-name">Conference & Events</div><p class="occ-desc">Premium event kits and delegate gifts that leave a lasting impression.</p></div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="corp-gallery">
+    <div class="reveal">
+      <p class="section-label">Our Work</p>
+      <h2 class="section-title">Crafted with <em>care</em></h2>
+    </div>
+    <div class="gallery-grid">
+      <img class="g-wide reveal d1" src="https://getyourgiftsonline.com/wp-content/uploads/elementor/thumbs/Corporate-Gift-Diggaj-r7hlkdyzaczxape3xwwmyb6wpu939k3m4q680pn30g.webp" alt="Corporate Gift">
+      <img class="reveal d2" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu6-768x1024.jpg" alt="Customer Gift">
+      <img class="reveal d3" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu7-768x1024.jpg" alt="Customer Gift">
+      <img class="reveal d1" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu2-768x1024.jpg" alt="Customer Gift">
+      <img class="reveal d2" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu3-768x1024.jpg" alt="Customer Gift">
+      <img class="reveal d3" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu4-768x1024.jpg" alt="Customer Gift">
+    </div>
+  </section>
+
+  <!-- CLIENTS -->
+  <section class="clients-section">
+    <div class="clients-head reveal">
+      <p class="section-label center">Trusted By</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:var(--charcoal);text-align:center">Companies that trust GYG</h3>
+    </div>
+    <div style="overflow:hidden">
+      <div class="cli-track">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C2-150x150.webp" alt="Assetz"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C3-150x150.webp" alt="Equitas"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C4-150x150.webp" alt="Karle Group"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C5-150x150.webp" alt="Mittal's"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C6-150x150.webp" alt="The Label"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g6-scaled.webp" alt="Neokred"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g5-scaled.webp" alt="Tara"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g4-scaled.webp" alt="Sightsee"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/g3-scaled.webp" alt="Melser"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2023/10/factsuite-logo.jpg" alt="Factsuite"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/Workshaala-Logo-Black.webp" alt="Workshaala"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/PNG-blue-upliance.webp" alt="Upliance"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/Combination-mark-Tagline-Blissclub-peach-1-scaled.webp" alt="Bliss Club">
+        <img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C2-150x150.webp" alt="Assetz"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C3-150x150.webp" alt="Equitas"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C4-150x150.webp" alt="Karle Group"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C5-150x150.webp" alt="Mittal's"><img class="cli-logo" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/C6-150x150.webp" alt="The Label">
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner reveal">
+    <div>
+      <p class="cta-label">Corporate Enquiries</p>
+      <h2 class="cta-title">Ready to gift your <em style="font-style:italic;color:var(--gold)">team?</em></h2>
+      <p class="cta-sub">Tell us your requirements and we'll create the perfect gifting solution.</p>
+    </div>
+    <div class="cta-acts">
+      <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <a href="#" onclick="nav('contact');return false" class="cta-email">Fill enquiry form →</a>
+    </div>
+  </div>
+
+</div><!-- /page-corporate -->
+
+
+<!-- ════════════════════════════════════════
+     PAGE: WEDDING
+════════════════════════════════════════ -->
+<div class="page" id="page-wedding">
+
+  <div class="page-hero">
+    <img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/home-section-222.jpg" alt="Wedding Favours">
+    <div class="page-hero-ov"></div>
+    <div class="page-hero-content">
+      <p class="page-hero-eye">Wedding & Special Occasions</p>
+      <h1>Wedding <em style="font-style:italic;color:var(--gold-light)">Favours</em></h1>
+      <p>Make every guest feel cherished with beautifully curated, personalised wedding favours and gift hampers crafted with love.</p>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="wed-intro">
+    <div class="rl">
+      <p class="section-label">Wedding Gifting</p>
+      <h2 class="section-title">Gifts as beautiful as <em>your big day</em></h2>
+      <p style="font-size:15px;color:var(--taupe);line-height:1.8;margin:18px 0">From the moment your guests arrive, every detail matters. Our wedding gift hampers are curated to reflect your love story — personalised, elegant, and crafted with intention.</p>
+      <p style="font-size:15px;color:var(--taupe);line-height:1.8;margin-bottom:28px">Whether it's welcome kits for out-of-town guests, bridesmaid boxes, groomsmen hampers or favours for every table — GYG makes it effortless and exquisite.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener">Plan Your Wedding Gifts</a>
+        <a href="#" onclick="nav('contact');return false" class="btn-outline-dark">Get a Quote</a>
+      </div>
+    </div>
+    <div class="rr">
+      <div class="corp-img-wrap">
+        <img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/home-section-222.jpg" alt="Wedding Favour">
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="wed-gallery">
+    <div class="reveal">
+      <p class="section-label">Our Wedding Collection</p>
+      <h2 class="section-title">Curated with <em>love</em></h2>
+    </div>
+    <div class="wed-mosaic">
+      <img class="w-tall reveal d1" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/home-section-2-768x1024.jpg" alt="Wedding Gift">
+      <img class="reveal d2" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu6-768x1024.jpg" alt="Wedding Favour">
+      <img class="reveal d3" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu7-768x1024.jpg" alt="Wedding Favour">
+      <img class="reveal d2" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu2-768x1024.jpg" alt="Wedding Gift">
+      <img class="reveal d3" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu3-768x1024.jpg" alt="Wedding Hamper">
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="wed-packages" style="padding:80px 6%">
+    <div class="reveal" style="text-align:center;margin-bottom:0">
+      <p class="section-label center">What We Offer</p>
+      <h2 class="section-title white">Perfect for <em>every</em> wedding role</h2>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg-card reveal d1">
+        <span class="pkg-label">Welcome Guests</span>
+        <h3 class="pkg-name">Welcome Hampers</h3>
+        <ul class="pkg-list">
+          <li>Personalised welcome notes</li>
+          <li>Local artisan snacks & treats</li>
+          <li>Premium toiletries & candles</li>
+          <li>Branded or custom box packaging</li>
+          <li>Suitable for hotel room delivery</li>
+        </ul>
+        <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-outline-light" target="_blank" rel="noopener" style="font-size:11px;padding:10px 22px">Enquire Now</a>
+      </div>
+      <div class="pkg-card reveal d2">
+        <span class="pkg-label">Bridal Party</span>
+        <h3 class="pkg-name">Bridesmaid Boxes</h3>
+        <ul class="pkg-list">
+          <li>Personalised jewellery & accessories</li>
+          <li>Spa & wellness products</li>
+          <li>Bespoke keepsakes</li>
+          <li>Custom ribbon & packaging</li>
+          <li>Heartfelt proposal notes</li>
+        </ul>
+        <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-outline-light" target="_blank" rel="noopener" style="font-size:11px;padding:10px 22px">Enquire Now</a>
+      </div>
+      <div class="pkg-card reveal d3">
+        <span class="pkg-label">Groom's Squad</span>
+        <h3 class="pkg-name">Groomsmen Hampers</h3>
+        <ul class="pkg-list">
+          <li>Premium grooming products</li>
+          <li>Gourmet snacks & beverages</li>
+          <li>Personalised accessories</li>
+          <li>Custom packaging & notes</li>
+          <li>Available in bulk quantities</li>
+        </ul>
+        <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-outline-light" target="_blank" rel="noopener" style="font-size:11px;padding:10px 22px">Enquire Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY GYG -->
+  <section class="wed-why" style="padding:80px 6%">
+    <div class="reveal" style="text-align:center;margin-bottom:0">
+      <p class="section-label center">Why Choose GYG</p>
+      <h2 class="section-title">Why brides & grooms <em>love us</em></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal d1"><span class="why-icon">✨</span><h3 class="why-title">Fully Personalised</h3><p class="why-desc">Every hamper is customised to reflect your unique love story, theme, and style. No two weddings are the same.</p></div>
+      <div class="why-card reveal d2"><span class="why-icon">📋</span><h3 class="why-title">Stress-Free Planning</h3><p class="why-desc">We handle everything from product selection to packaging and delivery — you just say yes.</p></div>
+      <div class="why-card reveal d3"><span class="why-icon">💐</span><h3 class="why-title">Bespoke Packaging</h3><p class="why-desc">Custom boxes, ribbons, tissue paper and tags that match your wedding palette and aesthetic perfectly.</p></div>
+      <div class="why-card reveal d1"><span class="why-icon">🚚</span><h3 class="why-title">On-Time Delivery</h3><p class="why-desc">We know your wedding timeline is non-negotiable. We guarantee delivery well before your big day.</p></div>
+      <div class="why-card reveal d2"><span class="why-icon">💰</span><h3 class="why-title">Flexible Budgets</h3><p class="why-desc">Premium quality at every price point — whether you're gifting 20 or 2,000 guests, we have a solution.</p></div>
+      <div class="why-card reveal d3"><span class="why-icon">💌</span><h3 class="why-title">Handwritten Notes</h3><p class="why-desc">Add a personal touch with handwritten or custom-printed notes for each of your special guests.</p></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testi-section" style="background:var(--blush)">
+    <div class="testi-header reveal">
+      <div>
+        <p class="section-label">Happy Couples</p>
+        <h2 class="section-title">Love from our <em>brides & grooms</em> ⭐</h2>
+      </div>
+      <div class="scroll-btns">
+        <button class="s-btn" onclick="scrollT2(-1)">←</button>
+        <button class="s-btn" onclick="scrollT2(1)">→</button>
+      </div>
+    </div>
+    <div class="testi-scroll reveal" id="testiScroll2">
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/4carosul-768x1024.jpg" alt="Review"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/3carossu-819x1024.jpg" alt="Review"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/2carosu-768x1024.jpg" alt="Review"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/1carosu-768x1024.jpg" alt="Review"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu4-768x1024.jpg" alt="Review"></div>
+      <div class="t-card"><img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu3-768x1024.jpg" alt="Review"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner reveal">
+    <div>
+      <p class="cta-label">Plan Your Wedding Gifts</p>
+      <h2 class="cta-title">Make your guests feel <em style="font-style:italic;color:var(--gold)">truly special</em></h2>
+      <p class="cta-sub">Let's create wedding favours your guests will cherish forever.</p>
+    </div>
+    <div class="cta-acts">
+      <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <a href="#" onclick="nav('contact');return false" class="cta-email">Fill enquiry form →</a>
+    </div>
+  </div>
+
+</div><!-- /page-wedding -->
+
+
+<!-- ════════════════════════════════════════
+     PAGE: OCCASIONAL
+════════════════════════════════════════ -->
+<div class="page" id="page-occasional">
+
+  <div class="page-hero">
+    <img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/occatinal.png" alt="Occasional Gifting">
+    <div class="page-hero-ov"></div>
+    <div class="page-hero-content">
+      <p class="page-hero-eye">For Every Special Moment</p>
+      <h1>Occasional <em style="font-style:italic;color:var(--gold-light)">Gifting</em></h1>
+      <p>From birthdays to baby showers, anniversaries to festivals — the perfect gift for every milestone in life.</p>
+    </div>
+  </div>
+
+  <!-- SHOWCASE -->
+  <section class="occ-hero-section">
+    <div class="reveal">
+      <p class="section-label">Our Collections</p>
+      <h2 class="section-title">A gift for <em>every</em> occasion</h2>
+      <p style="color:var(--taupe);margin-top:10px;font-size:15px;max-width:560px">Life is full of moments worth celebrating. We make sure every one of them is remembered with a gift that feels just right.</p>
+    </div>
+    <div class="occ-showcase">
+      <div class="occ-big reveal d1">
+        <img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/home-section-2-768x1024.jpg" alt="Occasional Gift">
+        <div class="occ-card-ov"></div>
+        <div class="occ-card-label">Festive Hampers</div>
+      </div>
+      <div>
+        <div class="occ-sm reveal d2" style="margin-bottom:22px">
+          <img src="https://getyourgiftsonline.com/wp-content/uploads/elementor/thumbs/carosu5-r7oxnjqmidl099plsxpjupmwp0o47dv88suasba2v4.jpg" alt="Diwali Hamper">
+          <div class="occ-card-ov"></div>
+          <div class="occ-card-label">Diwali Hampers</div>
+        </div>
+        <div class="occ-sm reveal d3">
+          <img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/occatinal.png" alt="Occasional Gift">
+          <div class="occ-card-ov"></div>
+          <div class="occ-card-label">Personal Gifts</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OCCASIONS GRID -->
+  <section class="occ-occasions-grid" style="padding:80px 6%">
+    <div class="reveal" style="text-align:center;margin-bottom:0">
+      <p class="section-label center">Every Celebration</p>
+      <h2 class="section-title">We gift for <em>all</em> of these</h2>
+    </div>
+    <div class="occ-cards">
+      <div class="occ-occasion-card reveal d1"><span class="oc-emoji">🎂</span><div class="oc-name">Birthdays</div><p class="oc-desc">Make their day unforgettable with a handpicked birthday hamper.</p></div>
+      <div class="occ-occasion-card reveal d2"><span class="oc-emoji">💍</span><div class="oc-name">Anniversaries</div><p class="oc-desc">Celebrate love milestones with curated luxury gift sets.</p></div>
+      <div class="occ-occasion-card reveal d3"><span class="oc-emoji">👶</span><div class="oc-name">Baby Showers</div><p class="oc-desc">Welcome little ones with warm, thoughtful hampers for new parents.</p></div>
+      <div class="occ-occasion-card reveal d4"><span class="oc-emoji">🪔</span><div class="oc-name">Diwali</div><p class="oc-desc">Premium festive hampers to spread joy and light this Diwali season.</p></div>
+      <div class="occ-occasion-card reveal d1"><span class="oc-emoji">🌸</span><div class="oc-name">Mother's Day</div><p class="oc-desc">Honour the women who matter most with beautiful curated gifts.</p></div>
+      <div class="occ-occasion-card reveal d2"><span class="oc-emoji">👨</span><div class="oc-name">Father's Day</div><p class="oc-desc">Thoughtful hampers that say thank you to the dad in your life.</p></div>
+      <div class="occ-occasion-card reveal d3"><span class="oc-emoji">🎓</span><div class="oc-name">Graduation</div><p class="oc-desc">Celebrate academic achievements with a special gift to cherish.</p></div>
+      <div class="occ-occasion-card reveal d4"><span class="oc-emoji">🎊</span><div class="oc-name">Housewarming</div><p class="oc-desc">Help someone settle into their new home with warm, welcome gifts.</p></div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="occ-products" style="padding:80px 6%">
+    <div class="reveal">
+      <p class="section-label">Featured Hampers</p>
+      <h2 class="section-title">Our most-loved <em>gift sets</em></h2>
+    </div>
+    <div class="occ-prod-grid">
+      <div class="prod-card reveal d1">
+        <img class="prod-img" src="https://getyourgiftsonline.com/wp-content/uploads/elementor/thumbs/carosu5-r7oxnjqmidl099plsxpjupmwp0o47dv88suasba2v4.jpg" alt="Festive Hamper">
+        <div class="prod-body">
+          <div class="prod-category">Festive · Diwali</div>
+          <div class="prod-name">The Festive Glow Hamper</div>
+          <p class="prod-desc">Traditional sweets, artisan candles, and curated dry fruits in a premium gift box. Perfect for spreading festive joy.</p>
+          <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener" style="margin-top:14px;font-size:11px;padding:10px 22px">Enquire Now</a>
+        </div>
+      </div>
+      <div class="prod-card reveal d2">
+        <img class="prod-img" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/home-section-222.jpg" alt="Luxury Hamper">
+        <div class="prod-body">
+          <div class="prod-category">Birthday · Anniversary</div>
+          <div class="prod-name">The Luxury Celebration Box</div>
+          <p class="prod-desc">Premium chocolates, spa products, and personalised keepsakes — a complete gifting experience for your loved ones.</p>
+          <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener" style="margin-top:14px;font-size:11px;padding:10px 22px">Enquire Now</a>
+        </div>
+      </div>
+      <div class="prod-card reveal d3">
+        <img class="prod-img" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/occatinal.png" alt="Wellness Hamper">
+        <div class="prod-body">
+          <div class="prod-category">Self-Care · Wellness</div>
+          <div class="prod-name">The Wellness Gift Set</div>
+          <p class="prod-desc">A thoughtful curation of wellness essentials, herbal teas, and aromatherapy products for those who deserve some self-love.</p>
+          <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener" style="margin-top:14px;font-size:11px;padding:10px 22px">Enquire Now</a>
+        </div>
+      </div>
+      <div class="prod-card reveal d1">
+        <img class="prod-img" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu6-768x1024.jpg" alt="Baby Hamper">
+        <div class="prod-body">
+          <div class="prod-category">Baby Shower · New Parents</div>
+          <div class="prod-name">The New Baby Hamper</div>
+          <p class="prod-desc">Gentle, curated items for newborns and new parents — organic essentials, keepsakes, and treats for the whole family.</p>
+          <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener" style="margin-top:14px;font-size:11px;padding:10px 22px">Enquire Now</a>
+        </div>
+      </div>
+      <div class="prod-card reveal d2">
+        <img class="prod-img" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/carosu2-768x1024.jpg" alt="Gourmet Hamper">
+        <div class="prod-body">
+          <div class="prod-category">Gourmet · Food Lovers</div>
+          <div class="prod-name">The Gourmet Indulgence Box</div>
+          <p class="prod-desc">Artisan cheeses, premium chocolates, and handpicked delicacies for the food lover in your life.</p>
+          <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener" style="margin-top:14px;font-size:11px;padding:10px 22px">Enquire Now</a>
+        </div>
+      </div>
+      <div class="prod-card reveal d3">
+        <img class="prod-img" src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/home-section-2-768x1024.jpg" alt="Custom Hamper">
+        <div class="prod-body">
+          <div class="prod-category">Fully Custom</div>
+          <div class="prod-name">Build Your Own Hamper</div>
+          <p class="prod-desc">Have something specific in mind? Tell us your story and budget and we'll create a completely bespoke gift just for you.</p>
+          <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener" style="margin-top:14px;font-size:11px;padding:10px 22px">Let's Talk</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process">
+    <div class="process-header reveal">
+      <p class="section-label center">How It Works</p>
+      <h2 class="section-title white">Gifting made <em>effortless</em></h2>
+      <p style="color:rgba(255,255,255,.4);margin-top:12px;font-size:14px">From idea to doorstep — a seamless gifting experience</p>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-step reveal d1"><span class="proc-num">01</span><span class="proc-icon">💬</span><h3 class="proc-title">Tell Us the Occasion</h3><p class="proc-desc">Share the occasion, your budget, and who you're gifting. We'll take it from there.</p></div>
+      <div class="proc-step reveal d2"><span class="proc-num">02</span><span class="proc-icon">🛍️</span><h3 class="proc-title">We Curate</h3><p class="proc-desc">Our team handpicks the best products and assembles them into a stunning hamper.</p></div>
+      <div class="proc-step reveal d3"><span class="proc-num">03</span><span class="proc-icon">🎀</span><h3 class="proc-title">Beautifully Packed</h3><p class="proc-desc">Each gift is wrapped and presented with care — ready to delight the recipient.</p></div>
+      <div class="proc-step reveal d4"><span class="proc-num">04</span><span class="proc-icon">🚚</span><h3 class="proc-title">Delivered with Love</h3><p class="proc-desc">PAN-India delivery — on time, every time, in perfect condition.</p></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner reveal">
+    <div>
+      <p class="cta-label">Shop Occasional Gifts</p>
+      <h2 class="cta-title">Find the <em style="font-style:italic;color:var(--gold)">perfect gift</em> today</h2>
+      <p class="cta-sub">Every occasion deserves something special. Let GYG help you get it right.</p>
+    </div>
+    <div class="cta-acts">
+      <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <a href="#" onclick="nav('contact');return false" class="cta-email">Fill enquiry form →</a>
+    </div>
+  </div>
+
+</div><!-- /page-occasional -->
+
+
+<!-- ════════════════════════════════════════
+     PAGE: CONTACT
+════════════════════════════════════════ -->
+<div class="page" id="page-contact">
+
+  <div class="page-hero" style="height:360px">
+    <img src="https://getyourgiftsonline.com/wp-content/uploads/2025/06/home-section-22-819x1024.jpg" alt="Contact Us">
+    <div class="page-hero-ov"></div>
+    <div class="page-hero-content">
+      <p class="page-hero-eye">Get In Touch</p>
+      <h1>Let's talk <em style="font-style:italic;color:var(--gold-light)">gifting</em></h1>
+      <p>Whether you have a specific idea or just need guidance — we're here to help you create something perfect.</p>
+    </div>
+  </div>
+
+  <!-- CONTACT LAYOUT -->
+  <section class="contact-layout">
+    <div class="rl">
+      <div class="section-label">Contact Us</div>
+      <h2 class="section-title">We'd love to <em>hear</em> from you</h2>
+      <p style="font-size:15px;color:var(--taupe);line-height:1.8;margin:16px 0 32px">Tell us about your gifting needs and we'll get back to you within a few hours. For faster response, reach us directly on WhatsApp.</p>
+
+      <div class="c-item">
+        <div class="c-icon">📞</div>
+        <div class="c-detail">
+          <p>Phone / WhatsApp</p>
+          <a href="tel:+919952441388">9952441388</a>
+          <a href="tel:+916362631461">6362631461</a>
+        </div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon">✉️</div>
+        <div class="c-detail">
+          <p>Email</p>
+          <a href="mailto:dharti@getyourgiftsonline.com">dharti@getyourgiftsonline.com</a>
+        </div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon">📍</div>
+        <div class="c-detail">
+          <p>Address</p>
+          <span>2nd Floor, Varthur-Sarjapur Rd,<br>opp. Greenwood High School,<br>Chikkawadyarapura, Bangalore – 560087</span>
+        </div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon">⏰</div>
+        <div class="c-detail">
+          <p>Working Hours</p>
+          <span>Monday – Saturday: 9am – 7pm</span>
+        </div>
+      </div>
+
+      <div class="c-socials">
+        <a href="https://www.facebook.com/getyourgiftonline" class="c-soc" target="_blank" rel="noopener" title="Facebook">f</a>
+        <a href="https://www.instagram.com/getyourgiftsonline/" class="c-soc" target="_blank" rel="noopener" title="Instagram">in</a>
+        <a href="https://www.youtube.com/@getyourgiftonlines" class="c-soc" target="_blank" rel="noopener" title="YouTube">▶</a>
+        <a href="https://www.linkedin.com/company/getyourgiftsonline/" class="c-soc" target="_blank" rel="noopener" title="LinkedIn">li</a>
+        <a href="https://api.whatsapp.com/send/?phone=916362631461" class="c-soc" target="_blank" rel="noopener" title="WhatsApp" style="background:#25D366;border-color:#25D366;color:#fff">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="rr">
+      <div class="contact-form">
+        <h3>Send us an Enquiry</h3>
+        <p>Fill in the details below and we'll reach out within a few hours.</p>
+        <div class="form-row">
+          <div class="form-group"><label>Your Name *</label><input type="text" placeholder="Dharti Patel" id="f-name"></div>
+          <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" placeholder="+91 98765 43210" id="f-phone"></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@company.com" id="f-email"></div>
+        <div class="form-group">
+          <label>Gifting Category *</label>
+          <select id="f-category">
+            <option value="">Select an option…</option>
+            <option>Corporate Gifting</option>
+            <option>Wedding Favours</option>
+            <option>Festive / Diwali Hampers</option>
+            <option>Occasional Gifting</option>
+            <option>Employee Onboarding Kit</option>
+            <option>Custom / Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Approx. Quantity</label><input type="text" placeholder="e.g. 50 hampers" id="f-qty"></div>
+          <div class="form-group"><label>Budget per Hamper</label><input type="text" placeholder="e.g. ₹500 – ₹1000" id="f-budget"></div>
+        </div>
+        <div class="form-group"><label>Tell us more</label><textarea placeholder="Describe your occasion, preferences, timeline or any special requests…" id="f-msg"></textarea></div>
+        <button class="btn-gold" style="width:100%;justify-content:center" onclick="submitForm()">Send Enquiry →</button>
+        <div class="form-success" id="formSuccess">
+          🎁 Thank you! We've received your enquiry and will reach out within a few hours. You can also WhatsApp us for a faster response.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="map-section">
+    <div class="reveal">
+      <p class="section-label">Find Us</p>
+      <h2 class="section-title">Visit our <em>studio</em></h2>
+    </div>
+    <iframe class="map-embed reveal" 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.823!2d77.735!3d12.913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU0JzQ3LjMiTiA3N8KwNDQnMDYuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="GYG Location">
+    </iframe>
+  </section>
+
+  <!-- FOUNDER -->
+  <section style="padding:0 6% 80px;background:var(--blush)">
+    <div style="padding:60px;background:var(--warm-white);border-radius:3px;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;max-width:800px;margin:0 auto" class="reveal">
+      <div style="width:120px;height:120px;border-radius:50%;overflow:hidden;border:3px solid var(--gold-light);flex-shrink:0">
+        <img src="https://getyourgiftsonline.com/wp-content/uploads/2023/01/761ff3f4-12c5-4bb1-9bb1-aa9f17218c60-225x300.jpg" alt="Dharti" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div>
+        <p class="section-label">A note from the founder</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--charcoal);line-height:1.8;font-style:italic;margin-bottom:18px">"I started GYG because I believe gifting is one of the most human things we can do. I wanted to make sure every gift we send out carries that feeling — of being truly seen and valued."</p>
+        <div class="f-name">Dharti</div>
+        <div class="f-role" style="color:var(--taupe);font-size:13px">Founder, Get Your Gifts Online</div>
+        <img src="https://getyourgiftsonline.com/wp-content/uploads/2023/01/rosemary-signature-2.png" alt="Signature" style="height:28px;margin-top:8px;opacity:.65">
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-contact -->
+
+
+<!-- ══ SHARED FOOTER ══ -->
+<footer id="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div class="f-logo"><img src="https://getyourgiftsonline.com/wp-content/uploads/2023/01/Website-logo-horizontalX2.png" alt="Get Your Gifts Online"></div>
+      <p class="f-about">Curated corporate and personalised gift hampers with PAN-India delivery from Bangalore. Eco-friendly, luxury gifts crafted for every occasion.</p>
+      <div class="f-social">
+        <a href="https://www.facebook.com/getyourgiftonline" class="fsoc" target="_blank" rel="noopener">f</a>
+        <a href="https://www.instagram.com/getyourgiftsonline/" class="fsoc" target="_blank" rel="noopener">in</a>
+        <a href="https://www.youtube.com/@getyourgiftonlines" class="fsoc" target="_blank" rel="noopener">▶</a>
+        <a href="https://www.linkedin.com/company/getyourgiftsonline/" class="fsoc" target="_blank" rel="noopener">li</a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Collections</h4>
+      <ul>
+        <li><a href="#" onclick="nav('corporate');return false">Corporate Gifts</a></li>
+        <li><a href="#" onclick="nav('wedding');return false">Wedding Favours</a></li>
+        <li><a href="#" onclick="nav('occasional');return false">Festive Hampers</a></li>
+        <li><a href="#" onclick="nav('occasional');return false">Occasional Gifts</a></li>
+        <li><a href="https://api.whatsapp.com/send/?phone=916362631461" target="_blank">Employee Onboarding</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#" onclick="nav('home');return false">Home</a></li>
+        <li><a href="#" onclick="nav('contact');return false">About Us</a></li>
+        <li><a href="https://api.whatsapp.com/send/?phone=916362631461" target="_blank">Get a Quote</a></li>
+        <li><a href="https://www.instagram.com/getyourgiftsonline/" target="_blank">Gallery</a></li>
+        <li><a href="#" onclick="nav('contact');return false">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Contact</h4>
+      <div class="fcon"><span class="fcon-icon">✉</span><a href="mailto:dharti@getyourgiftsonline.com">dharti@getyourgiftsonline.com</a></div>
+      <div class="fcon"><span class="fcon-icon">📞</span><div><a href="tel:+919952441388">9952441388</a><br><a href="tel:+916362631461">6362631461</a></div></div>
+      <div class="fcon"><span class="fcon-icon">📍</span><span>2nd Floor, Varthur-Sarjapur Rd, Bangalore – 560087</span></div>
+      <a href="https://api.whatsapp.com/send/?phone=916362631461" class="btn-gold" target="_blank" rel="noopener" style="margin-top:16px;font-size:11px;padding:10px 22px">WhatsApp Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Get Your Gifts Online. All rights reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── LOADER ── */
+window.addEventListener('load',()=>{
+  setTimeout(()=>document.getElementById('loader').classList.add('hide'),1800);
+});
+
+/* ── NAV SCROLL ── */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('bg',window.scrollY>50);
+});
+// set bg on inner pages immediately
+function setNavBg(page){
+  if(page!=='home') navbar.classList.add('bg');
+  else { if(window.scrollY<50) navbar.classList.remove('bg'); }
+}
+
+/* ── PAGE NAVIGATION ── */
+let currentPage='home';
+function nav(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('[data-page]').forEach(a=>{
+    a.classList.toggle('active',a.dataset.page===page);
+  });
+  currentPage=page;
+  window.scrollTo({top:0,behavior:'instant'});
+  setNavBg(page);
+  // trigger reveals for new page
+  setTimeout(initReveal,100);
+}
+
+/* ── MOBILE NAV ── */
+function openMob(){document.getElementById('mobNav').classList.add('open')}
+function closeMob(){document.getElementById('mobNav').classList.remove('open')}
+document.getElementById('mobClose').onclick=closeMob;
+
+/* ── HERO SLIDER ── */
+let slideIdx=0;
+const slides=document.querySelectorAll('.h-slide');
+const hdots=document.querySelectorAll('.h-dot');
+function goSlide(n){
+  slides[slideIdx].classList.remove('active');
+  hdots[slideIdx].classList.remove('active');
+  slideIdx=n;
+  slides[slideIdx].classList.add('active');
+  hdots[slideIdx].classList.add('active');
+}
+setInterval(()=>goSlide((slideIdx+1)%slides.length),5000);
+
+/* ── TESTIMONIAL SCROLLS ── */
+function scrollT(d){
+  const el=document.getElementById('testiScroll');
+  el.scrollBy({left:d*580,behavior:'smooth'});
+}
+function scrollT2(d){
+  const el=document.getElementById('testiScroll2');
+  if(el) el.scrollBy({left:d*580,behavior:'smooth'});
+}
+
+/* ── SCROLL REVEAL ── */
+function initReveal(){
+  document.querySelectorAll('.page.active .reveal,.page.active .rl,.page.active .rr').forEach(el=>{
+    new IntersectionObserver((entries,obs)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target);}
+      });
+    },{threshold:0.1}).observe(el);
+  });
+}
+initReveal();
+window.addEventListener('scroll',()=>{
+  // re-check for home page since it's always visible at start
+});
+
+/* ── CONTACT FORM ── */
+function submitForm(){
+  const name=document.getElementById('f-name').value.trim();
+  const phone=document.getElementById('f-phone').value.trim();
+  const cat=document.getElementById('f-category').value;
+  if(!name||!phone||!cat){
+    alert('Please fill in your name, phone, and gifting category.');
+    return;
+  }
+  // Compose WhatsApp message
+  const msg=encodeURIComponent(
+    `Hi GYG! I'd like to enquire about gifting.\n\n`+
+    `Name: ${name}\nPhone: ${phone}\n`+
+    `Email: ${document.getElementById('f-email').value||'—'}\n`+
+    `Category: ${cat}\n`+
+    `Quantity: ${document.getElementById('f-qty').value||'—'}\n`+
+    `Budget: ${document.getElementById('f-budget').value||'—'}\n`+
+    `Message: ${document.getElementById('f-msg').value||'—'}`
+  );
+  // Show success
+  document.getElementById('formSuccess').style.display='block';
+  // Open WA
+  window.open(`https://api.whatsapp.com/send/?phone=916362631461&text=${msg}`,'_blank');
+}
+</script>
+</body>
+</html>
